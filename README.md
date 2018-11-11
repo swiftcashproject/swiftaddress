@@ -1,4 +1,3 @@
-# https://paperwallet.swiftcash.cc
 JavaScript Client-Side Smartcash Wallet Generator
 
 Now SwiftCash addresses and their corresponding private key can be conveniently 
