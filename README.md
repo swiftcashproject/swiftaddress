@@ -1,7 +1,7 @@
 # DEMO
-## https://swiftcash.cc/swiftaddress/paperwallet.html
-## https://swiftcash.cc/swiftaddress/brainwallet.html
-## https://swiftcash.cc/swiftaddress/hdwallet.html
+## https://address.swiftcash.cc/paperwallet.html
+## https://address.swiftcash.cc/brainwallet.html
+## https://address.swiftcash.cc/hdwallet.html
 
 JavaScript Client-Side Smartcash Wallet Generator
 
