@@ -6776,7 +6776,7 @@ hr { margin: 20px 0; border-top: 2px dashed #008000; }
 .pubkeyhex { word-wrap: break-word; }
 .keyarea .public .pubaddress .output, .keyarea .private .privwif .output { text-align: center; }
 #SinglePubAddressBG { background-color: white; width: 305px; }
-#SinglePrivWifBG { background-color: white; width: 470px; left: 90px; }
+#SinglePrivWifBG { background-color: white; width: 465px; left: 90px; }
 .keyarea .public .qrcode_public canvas, .keyarea .private .qrcode_private canvas { background-color: white; padding: 0px; }
 .imageSingle { width: 806px; height: 237px; top: -2px; left: 0px; display: block; float: left; overflow: hidden; position: absolute; z-index: -1; }
 .removeImage { visibility: hidden; }
@@ -6810,7 +6810,8 @@ input[type=checkbox] { position: relative; z-index: 20; top: 2px; }
 #singlearea { font-size: 90%; }
 #singlesecret { color: #b50404; background-color: white; position: relative; top: -130px; float: right; right: 180px; color: 000000; font-weight: bolder; font-size: 220%; }
 #singleshare { color: #0d5000!important; background-color: white; position: relative; top: -110px; float: left; left: 148px; color: #000000; font-weight: bolder; font-size: 220%; }
-#singlelabelbitcoinaddress { left: 10px; }
+#singlelabelbitcoinaddress { position: relative; left: 17px; top: 10px; background-color: #16430d; }
+#singlelabelprivatekey { position: relative; top: 10px; right: 20px; background: #b83024; }
 #singlesafety { text-align: left; padding: 5px; border-top: 2px solid #046bc3; top: -25px; position: relative; }
 #main { position: relative; text-align: center; margin: 0px auto; width: 808px; }
 #logo { width: 383px; }
@@ -6819,10 +6820,8 @@ input[type=checkbox] { position: relative; z-index: 20; top: 2px; }
 #paperarea .keyarea { border: 2px solid #046bc3; border-top: 0; }
 #paperarea .keyarea.art { display: block; height: auto; border: 0; font-family: Ubuntu, Arial; padding: 0; margin: 0; }
 #paperarea .artwallet .papersvg { width: 486px; height: 261px; border: 0; margin: 0; padding: 0; left: 0; }
-#paperarea .artwallet .qrcode_public { top: 52px; left: 23px; z-index: 100; margin: 0; float: none; display: block; position: absolute; background-color: #FFFFFF; 
-		                                padding: 5px 5px 2px 5px; } 
-#paperarea .artwallet .qrcode_private { top: 124px; left: 365px; z-index: 100; margin: 0; float: none; display: block; position: absolute; background-color: #FFFFFF; 
-		                                padding: 5px 5px 2px 5px; }
+#paperarea .artwallet .qrcode_public { top: 57px; left: 28px; z-index: 100; margin: 0; float: none; display: block; position: absolute; background-color: #FFFFFF; }
+#paperarea .artwallet .qrcode_private { top: 134px; left: 370px; z-index: 100; margin: 0; float: none; display: block; position: absolute; background-color: #FFFFFF; }
 #paperarea .artwallet .btcaddress  
 {
 	position: absolute; top: 230px; left: 137px; z-index: 100; font-size: 10px; background-color: transparent;
@@ -7050,7 +7049,7 @@ input[type=checkbox] { position: relative; z-index: 20; top: 2px; }
 						</div>
 						<div class="private">
 							<div class="privwif">
-								<span class="label" id="singlelabelprivatekey">Private Key</span>
+								<span class="label" id="singlelabelprivatekey">SwiftCash Private Key</span>
 							</div>
 							<div id="qrcode_private" class="qrcode_private"></div>
 							<div class="privwif" id="SinglePrivWifBG">
@@ -7647,8 +7646,8 @@ ninja.seeder = {
 			var qrcode = new QRCode(typeNumber, QRCode.ErrorCorrectLevel.H);
 			qrcode.addData(text);
 			qrcode.make();
-			var width = qrcode.getModuleCount() * sizeMultiplier;
-			var height = qrcode.getModuleCount() * sizeMultiplier;
+			var width = qrcode.getModuleCount() * sizeMultiplier - 10;
+			var height = qrcode.getModuleCount() * sizeMultiplier - 10;
 			// create canvas element
 			var canvas = document.createElement('canvas');
 			var scale = 10.0;
@@ -7656,6 +7655,7 @@ ninja.seeder = {
 			canvas.height = height * scale;
 			canvas.style.width = width + 'px';
 			canvas.style.height = height + 'px';
+			canvas.style.padding = '5px';
 			var ctx = canvas.getContext('2d');
 			ctx.scale(scale, scale);
 			// compute tileW/tileH based on width/height
