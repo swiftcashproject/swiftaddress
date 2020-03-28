@@ -71,9 +71,9 @@
 	var prvKey_to_WIF = function(prvKey, compressed) {
 		prvKey = compressed ? prvKey+'01' : prvKey;
 		var baby = CryptoJS.enc.Hex.parse(prvKey);
-		var version = CryptoJS.enc.Hex.parse('BF');
+		var version = CryptoJS.enc.Hex.parse('98');
 		var child = version.concat(baby);
-		var teenager = hash_keccak(child);
+		var teenager = hash_sha256(hash_sha256(child));
 		var checksum = CryptoJS.lib.WordArray.create(teenager.words.slice(0, 4), 4);
 		var adult = child.concat(checksum);
 		var bytes = wordArrayToByteArray(adult);
@@ -86,7 +86,7 @@
 		var version = CryptoJS.enc.Hex.parse('3F');
 		version.concat(child);
 		var teenager = version;
-		var adult = hash_keccak(teenager);
+		var adult = hash_sha256(hash_sha256(teenager));
 		var checksum = CryptoJS.lib.WordArray.create(adult.words.slice(0, 4), 4);
 		var pensioner = teenager;
 		pensioner.concat(checksum);

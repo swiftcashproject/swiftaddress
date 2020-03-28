@@ -48,8 +48,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<script type="text/javascript">
-	if((location.href).match("http://brainwallet.swiftcash.cc")) {
-	//	location.href =  "https://brainwallet.swiftcash.cc";
+	if((location.href).match("http://swiftcash.cc/brainwallet.html")) {
+	//	location.href =  "https://swiftcash.cc/brainwallet.html";
 	}
 	var hash_keccak = function(s) { return CryptoJS.SHA3(s, {  outputLength: 256, asBytes: true }); }
 	var hash_sha256 = function(s) { return CryptoJS.SHA256(s, { asBytes: true }); }
@@ -71,9 +71,9 @@
 	var prvKey_to_WIF = function(prvKey, compressed) {
 		prvKey = compressed ? prvKey+'01' : prvKey;
 		var baby = CryptoJS.enc.Hex.parse(prvKey);
-		var version = CryptoJS.enc.Hex.parse('BF');
+		var version = CryptoJS.enc.Hex.parse('98');
 		var child = version.concat(baby);
-		var teenager = hash_keccak(child);
+		var teenager = hash_sha256(hash_sha256(child));
 		var checksum = CryptoJS.lib.WordArray.create(teenager.words.slice(0, 4), 4);
 		var adult = child.concat(checksum);
 		var bytes = wordArrayToByteArray(adult);
@@ -86,7 +86,7 @@
 		var version = CryptoJS.enc.Hex.parse('3F');
 		version.concat(child);
 		var teenager = version;
-		var adult = hash_keccak(teenager);
+		var adult = hash_sha256(hash_sha256(teenager));
 		var checksum = CryptoJS.lib.WordArray.create(adult.words.slice(0, 4), 4);
 		var pensioner = teenager;
 		pensioner.concat(checksum);

@@ -27494,26 +27494,15 @@ module.exports = HDNode
 },{"./crypto":88,"./ecpair":90,"./networks":93,"./types":120,"bigi":37,"bs58smartcheck":"bs58smartcheck","create-hmac":57,"ecurve":61,"safe-buffer":76,"typeforce":123}],93:[function(require,module,exports){
 module.exports = {
   bitcoin: {
-    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    messagePrefix: '\x18SwiftCash Signed Message:\n',
     bech32: 'bc',
     bip32: {
       public: 0x0488b21e,
       private: 0x0488ade4
     },
-    pubKeyHash: 0x3F,
+    pubKeyHash: 0x3f,
     scriptHash: 0x12,
-    wif: 0xBF
-  },
-  testnet: {
-    messagePrefix: '\x18Bitcoin Signed Message:\n',
-    bech32: 'tb',
-    bip32: {
-      public: 0x043587cf,
-      private: 0x04358394
-    },
-    pubKeyHash: 0x41,
-    scriptHash: 0x15,
-    wif: 0xc1
+    wif: 0x98
   },
 }
 
@@ -31090,7 +31079,7 @@ function keccak (buffer) {
 
 // Encode a buffer as a base58-check encoded string
 function encode (payload) {
-  var checksum = keccak(payload)
+  var checksum = hash256(payload)
 
   return base58.encode(Buffer.concat([
     payload,
@@ -31101,7 +31090,7 @@ function encode (payload) {
 function decodeRaw (buffer) {
   var payload = buffer.slice(0, -4)
   var checksum = buffer.slice(-4)
-  var newChecksum = keccak(payload)
+  var newChecksum = hash256(payload)
 
   if (checksum[0] ^ newChecksum[0] |
       checksum[1] ^ newChecksum[1] |
